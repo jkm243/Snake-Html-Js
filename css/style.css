@@ -1,10 +1,62 @@
+*{margin:0; padding:0;}
+
+body{
+    font-family: "LEMON MILK", Verdana, Arial, Helvetica, sans-serif;
+    background-image: url("../img/bg.jpg")
+}
 #snakeboard {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 2px solid greenyellow;
 }
 #score {
     text-align: center;
     font-size: 50px;
+    color: greenyellow;
+}
+.button{
+    position: absolute;
+    top: 90%;
+    left: 43%;
+}
+.button button{
+    padding: 1em 2em;
+    border: 1px solid rgb(56, 56, 56);
+    border-radius: 3px;
+    margin: 5px;
+    background-color:#e7e5e5;
+    color: #414040;
+    overflow: hidden;
+}
+button:hover{
+    background-color: green;
+    border: 1px solid #ffffff;
+    color: white;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.11);
+}
+
+
+
+@media(max-width: 700px) {
+    .button{
+        position: absolute;
+        left: 35%;
+    }
+}
+
+@media(max-width: 500px) {
+    .button{
+        position: absolute;
+        left: 20%;
+    }
+}
+
+@media(min-width: 701px) {
+    .button{
+        position: absolute;
+        left: 35%;
+    }
 }

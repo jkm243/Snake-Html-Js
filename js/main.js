@@ -1,4 +1,4 @@
-const board_border = 'black';
+const board_border = 'green';
 const board_background = "white";
 const snake_col = 'lightblue';
 const snake_border = 'darkblue';
@@ -18,10 +18,14 @@ let changing_direction = false;
 let food_x;
 let food_y;
 let dx = 10;
+
+
 // Vertical velocity
 let dy = 0;
 
-
+// Get button
+const reset = document.getElementById("reset");
+const scoring = document.getElementById("scoring");
 // Get the canvas element
 const snakeboard = document.getElementById("snakeboard");
 // Return a two dimensional drawing context
@@ -32,6 +36,9 @@ main();
 gen_food();
 
 document.addEventListener("keydown", change_direction);
+reset.addEventListener("click",reset_game)
+scoring.addEventListener('click',)
+
 
 // main function called repeatedly to keep the game running
 function main() {
@@ -59,6 +66,9 @@ function clear_board() {
     snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
     // Draw a "border" around the entire canvas
     snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+    // Draw a border line width
+    snakeboard_ctx.linewidth = 4;
+
 }
 
 // Draw the snake on the canvas
@@ -165,4 +175,8 @@ function move_snake() {
         // Remove the last part of snake body
         snake.pop();
     }
+}
+
+function reset_game(){
+    window.location.reload();
 }

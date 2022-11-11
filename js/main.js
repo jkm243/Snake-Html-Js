@@ -11,7 +11,10 @@ let snake = [
     { x: 160, y: 200 }
 ]
 
+let speed;
+let player;
 let score = 0;
+let score_final=document.getElementById('score').innerHTML;
 // True if changing direction
 let changing_direction = false;
 // Horizontal velocity
@@ -36,15 +39,15 @@ main();
 gen_food();
 
 document.addEventListener("keydown", change_direction);
-reset.addEventListener("click",reset_game)
-scoring.addEventListener('click',)
+reset.addEventListener("click",reset_game);
+scoring.addEventListener('click',score_show)
 
 
 // main function called repeatedly to keep the game running
 function main() {
 
-    if (has_game_ended()) return;
-
+    if (has_game_ended()) return game_over();
+    
     changing_direction = false;
     setTimeout(function onTick() {
         clear_board();
@@ -53,9 +56,22 @@ function main() {
         drawSnake();
         // Repeat
         main();
-    }, 100)
+    }, speed)
 }
 
+
+window.addEventListener('load',()=>{
+     player = prompt("what is your name?");
+     speed_qst = parseInt(prompt('Selct your level:'+'\n'+'1 = Baby'+'\n'+'2 = Medium'+'\n'+'3 = Senior'))
+
+     if (speed_qst == 1){
+        speed = 200
+     }else if (speed_qst == 2){
+        speed = 150
+     }else if (speed_qst == 3){
+        speed = 100
+     }
+})
 // draw a border around the canvas
 function clear_board() {
     //  Select the colour to fill the drawing
@@ -86,7 +102,6 @@ function drawFood() {
 
 // Draw one snake part
 function drawSnakePart(snakePart) {
-
     // Set the colour of the snake part
     snakeboard_ctx.fillStyle = snake_col;
     // Set the border colour of the snake part
@@ -106,7 +121,7 @@ function has_game_ended() {
     const hitRightWall = snake[0].x > snakeboard.width - 10;
     const hitToptWall = snake[0].y < 0;
     const hitBottomWall = snake[0].y > snakeboard.height - 10;
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
+    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall 
 }
 
 function random_food(min, max) {
@@ -169,14 +184,38 @@ function move_snake() {
         score += 10;
         // Display score on screen
         document.getElementById('score').innerHTML = score;
+        score_final= score 
         // Generate new food location
         gen_food();
     } else {
         // Remove the last part of snake body
         snake.pop();
+        
     }
 }
 
 function reset_game(){
-    window.location.reload();
+    alert("Player: "+player+'\n'+"Score: "+score_final+'\n'+"Food: "+score_final/10);
+    window.location.reload(); 
 }
+function score_show(){
+        if (confirm("Do you want to continue?") == true) {
+            alert("Player: "+player+'\n'+"Score: "+score_final+'\n'+"Food: "+score_final/10);
+        } else {
+            reset_game;
+        }
+}
+function game_over(){
+    if (confirm("Player: "+player+'\n'+"Score: "+score_final+'\n'+"Food: "+score_final/10+'\n'+"Game Over"+"\n"+ "Do you want to restart?") == true) {
+        window.location.reload(); 
+    } else {
+        window.close();
+    }
+}
+
+// function write_score(){
+//     const fs = require('fs')
+//     fs.writeFile('../score.txt',score,(err)=>{
+//         if (err) throw err;
+//     })
+// }

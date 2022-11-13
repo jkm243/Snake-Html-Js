@@ -1,7 +1,7 @@
 # Snake-Html-Js
 A snake game made for web browser
 
-## Documentation & Resoources
+## Documentation & Resources
 
 * [Javascript](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 
